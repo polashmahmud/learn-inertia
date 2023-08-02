@@ -9,6 +9,15 @@ defineProps({
 const form = useForm({
     body: '',
 })
+
+const createPost = () => {
+  form.post(route('posts'), {
+      onSuccess: () => {
+          form.reset()
+      }
+  });
+}
+
 </script>
 
 <template>
@@ -21,10 +30,12 @@ const form = useForm({
 
         <div class="py-12">
             <div class="max-w-3xl mx-auto sm:px-6 lg:px-8 space-y-3">
-                <form class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-                    {{ form }}
+                <form @submit.prevent="createPost" class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
                     <label for="body" class="sr-only">Body</label>
                     <textarea v-model="form.body" name="body" id="body" cols="30" rows="5" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-full"></textarea>
+                    <div class="text-sm text-red-500" v-if="form.errors.body">
+                        {{ form.errors.body }}
+                    </div>
                     <button type="submit" class="mt-2 bg-gray-700 px-4 py-2 rounded-md font-medium text-white">Post</button>
                 </form>
 
