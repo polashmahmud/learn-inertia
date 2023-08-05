@@ -10,7 +10,7 @@ defineProps({
 </script>
 
 <template>
-  <Head title="Posts"/>
+  <Head :title="user.name"/>
 
   <AuthenticatedLayout>
     <template #header>

@@ -19,12 +19,6 @@ const createPost = () => {
   });
 }
 
-const refreshPosts = () => {
-  router.get(route('posts'), {}, {
-      only: ['posts']
-  });
-}
-
 </script>
 
 <template>
@@ -54,14 +48,14 @@ const refreshPosts = () => {
                 </form>
 
                 <div class="text-center">
-                    <button @click="refreshPosts" type="button" class="text-sm text-indigo-600">Refresh Posts</button>
+                    <Link :href="route('posts')" preserve-scroll :only="['posts']" type="button" class="text-sm text-indigo-600">Refresh Posts</Link>
                 </div>
 
                 <div v-for="post in posts" :key="post.id">
                     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div class="p-6 text-gray-900">
                             <div class="font-semibold">
-                              <Link :href="route('users.show', post.user)">{{ post.user.name }}</Link>
+                              <Link :href="route('users.show', post.user)" preserve-scroll>{{ post.user.name }}</Link>
                             </div>
                             <p class="mt-1">{{ post.body }}</p>
                         </div>
