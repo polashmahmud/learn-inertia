@@ -3,6 +3,7 @@
 use App\Http\Controllers\PostIndexController;
 use App\Http\Controllers\PostStoreController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserShowController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -33,6 +34,7 @@ Route::get('/dashboard', function () {
 
 Route::get('/posts', PostIndexController::class)->name('posts');
 Route::post('/posts', PostStoreController::class);
+Route::get('/users/{user}', UserShowController::class)->name('users.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
