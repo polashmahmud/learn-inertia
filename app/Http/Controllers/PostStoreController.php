@@ -16,14 +16,12 @@ class PostStoreController extends Controller
      */
     public function __invoke(Request $request)
     {
-//        sleep(5);
-
         $this->validate($request, [
            'body' => 'required'
         ]);
 
         $request->user()->posts()->create($request->only('body'));
 
-        return back();
+        return back()->with('success', 'message');
     }
 }

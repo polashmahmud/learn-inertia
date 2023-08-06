@@ -1,6 +1,11 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import {Head, useForm, Link} from '@inertiajs/vue3';
+import {Head, useForm, Link, usePage} from '@inertiajs/vue3';
+import { useToast } from "vue-toastification";
+import {watch} from "vue";
+
+const toast = useToast();
+const page = usePage();
 
 defineProps({
   posts: Array
@@ -8,6 +13,10 @@ defineProps({
 
 const form = useForm({
   body: '',
+})
+
+watch(() => page.props.message, (message) => {
+  toast(message.body, { type : message.type} )
 })
 
 const createPost = () => {
